@@ -1,15 +1,17 @@
 package it.epicode.e1w5;
 
-import it.epicode.e1w5.bean.Bevanda;
-import it.epicode.e1w5.bean.Menu;
-import it.epicode.e1w5.bean.PizzaBase;
-import it.epicode.e1w5.bean.Topping;
+import it.epicode.e1w5.bean.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @Configuration
+@PropertySource("application.properties")
 public class AppConfig {
     @Bean("funghi")
     public Topping getFunghi(){
@@ -107,7 +109,7 @@ public class AppConfig {
         p.setNome("Capricciosa");
         p.setPrezzo(8.00);
         p.setCalorie(1400);
-        p.setToppings(List.of(getFunghi(),getCotto(),getCotto()));
+        p.setToppings(List.of(getFunghi()));
         return p;
     }
     @Bean("menu")
@@ -118,4 +120,30 @@ public class AppConfig {
        m.setBevande(List.of(getAcqua(),getCoca(),getBirra()));
        return m;
     }
+    @Bean("tavolo1")
+   public Tavolo tavolo1(){
+        Tavolo t = new Tavolo();
+        t.setNumeroTavolo(1);
+        t.setStato(Stato.LIBERO);
+        t.setMassimonumeroCoperti(4);
+        return t;
+
+   }
+   @Bean("ordine1")
+   public Ordine ordine(@Value("${e1w5.coperto}")String coperto){
+        Ordine o = new Ordine();
+        o.setPizze(List.of(getMargherita(),getMargherita(),getDiavola()));
+        o.setBevande(List.of(getCoca(),getCoca(),getBirra()));
+        o.setNumeroOrdine(1);
+        o.setStato(Stato.INCORSO);
+        o.setNumeroCoperti(4);
+        o.setCostoCoperto(Double.parseDouble(coperto));
+        o.setOraAcquisizione(LocalTime.of(20,30));
+        o.getImportoTotale();
+        o.setNumeroTavolo(tavolo1());
+
+        return o;
+
+
+   }
 }
