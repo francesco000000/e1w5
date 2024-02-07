@@ -1,7 +1,9 @@
 package it.epicode.e1w5;
 
+import it.epicode.e1w5.bean.Menu;
 import it.epicode.e1w5.bean.Ordine;
 import it.epicode.e1w5.bean.PizzaBase;
+import it.epicode.e1w5.bean.Tavolo;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -20,7 +22,5 @@ public class Runner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(E1w5Application.class);
 
-       Ordine ordine1 = ctx.getBean("ordine1", Ordine.class);
-        System.out.println(ordine1);
     }
 }
