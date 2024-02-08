@@ -126,6 +126,7 @@ public class AppConfig {
         t.setNumeroTavolo(1);
         t.setStato(Stato.LIBERO);
         t.setMassimonumeroCoperti(4);
+
         return t;
 
    }
@@ -140,7 +141,7 @@ public class AppConfig {
         o.setCostoCoperto(Double.parseDouble(coperto));
         o.setOraAcquisizione(LocalTime.of(20,30));
         o.getImportoTotale();
-        o.setNumeroTavolo(tavolo1());
+
 
         return o;
 
